@@ -1,9 +1,10 @@
 import React, { Component, PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
-import Link from './Components/link'
+import Link from './Components/link';
 import Button from './Components/button';
 import Mouse from './Components/mouse';
+import Input from './Components/input';
 
 const btn = {
   width:'80px',
@@ -35,9 +36,11 @@ class App extends PureComponent {
     super(props);
     this.state = {
       x: '50%',
-      y: '50%'
+      y: '50%',
+      input: ''
     }
     this.handleMouse = this.handleMouse.bind(this);
+    this.changeInput = this.changeInput.bind(this);
   }
 
   handleMouse (event) {
@@ -47,6 +50,9 @@ class App extends PureComponent {
     })
   }
 
+  changeInput (event) {
+    this.setState({input:event.target.value});
+  }
 
   render () {
     return (
@@ -55,7 +61,8 @@ class App extends PureComponent {
         style={div}
       >
         <Link text={'hello :)'} special={{position:'absolute', left:this.state.x + 20, top:this.state.y}}/>
-        <Button text={'enter'} func={() => console.log('click!')} special={btn}/>
+        <Input ref={'myInput'} placeholder={'input...'} func={this.changeInput}/>
+        <Button text={'enter'} func={() => this.refs.myInput.value = ''} special={btn}/>
       </div>
     )
   }
