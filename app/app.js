@@ -62,7 +62,10 @@ class App extends PureComponent {
       >
         <Link text={'hello :)'} special={{position:'absolute', left:this.state.x + 20, top:this.state.y}}/>
         <Input ref={'myInput'} placeholder={'input...'} func={this.changeInput}/>
-        <Button text={'enter'} func={() => this.refs.myInput.value = ''} special={btn}/>
+        <Button text={'enter'} func={() => {
+          this.refs.myInput.value = '';
+          console.log('->',this.state.input)
+        }} special={btn}/>
       </div>
     )
   }
