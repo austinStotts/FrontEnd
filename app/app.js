@@ -5,6 +5,8 @@ import Link from './Components/link';
 import Button from './Components/button';
 import Mouse from './Components/mouse';
 import Input from './Components/input';
+import Bar from './Components/bar';
+import Repeat from './Components/repeat';
 
 const btn = {
   width:'80px',
@@ -56,16 +58,10 @@ class App extends PureComponent {
 
   render () {
     return (
-      <div 
-        onMouseMove={this.handleMouse}
-        style={div}
-      >
-        <Link text={'hello :)'} special={{position:'absolute', left:this.state.x + 20, top:this.state.y}}/>
-        <Input ref={'myInput'} placeholder={'input...'} func={this.changeInput}/>
-        <Button text={'enter'} func={() => {
-          this.refs.myInput.value = '';
-          console.log('->',this.state.input)
-        }} special={btn}/>
+      <div>
+        <Repeat times={10}>
+          {(index) => <div key={index}>im a dang component... {index}</div>}
+        </Repeat>
       </div>
     )
   }
