@@ -78,7 +78,7 @@ class App extends PureComponent {
       return (
         <div style={{margin:'30px'}}>
           <div style={{margin:'0px'}}>
-            <Canvas clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={screen.width - 100} height={screen.height - 400}/>
+            <Canvas clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={screen.width - 70} height={screen.height - 500}/>
           </div>
           <div style={{margin:'20px'}}>
             <div style={{border:'1px solid black',borderRadius:'5px',width:'100px', height:'70px', display:'inline-block', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>

@@ -24,7 +24,7 @@ class Slider extends PureComponent {
           style={{width:'200px', cursor:'pointer', fontFamily:'Roboto, sans-serif'}}
         >
         </input>
-        <label for={this.props.name} style={{fontFamily:'Roboto, sans-serif'}}>{this.props.label}</label>
+        <label htmlFor={this.props.name} style={{fontFamily:'Roboto, sans-serif'}}>{this.props.label}</label>
       </div>
     )
   }
