@@ -26,7 +26,8 @@ const styles = {
       border:'1px solid black',
       borderRadius:'5px',
       outline:'none',
-      display:'inline-block'
+      display:'inline-block',
+      cursor:'pointer'
     }
   },
   uislider: {

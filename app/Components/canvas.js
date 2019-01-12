@@ -8,12 +8,33 @@ class Canvas extends PureComponent {
       draw: false,
       x: '',
       y: '',
-      url: ''
+      url: '',
+      undo: [],
     }
     this.draw = this.draw.bind(this);
     this.start = this.start.bind(this);
     this.end = this.end.bind(this);
     this.download = this.download.bind(this);
+    this.save = this.save.bind(this);
+    this.undo = this.undo.bind(this);
+  }
+
+  save () {
+    if(this.state.undo.length > 10) {
+      let copy = document.getElementById('canvas').Uint8ClampedArray();
+      this.setState({undo:undo.shift()});
+      this.setState({undo:undo.push(copy)});
+    } else {
+      let copy = document.getElementById('canvas');
+      copy = new Uint8ClampedArray(copy);
+      this.setState({undo: undo.concat(ImageData(copy, screen.width - 70, screen.height - 500))});
+    }
+  }
+
+  undo () {
+    if(this.state.url.length > 0) {
+      document.getElementById('canvas').putImageURL(this.state.url.pop());
+    }
   }
 
   start (event) {
@@ -59,7 +80,10 @@ class Canvas extends PureComponent {
           id="canvas"
           ref="canvas" 
           key={this.props.clear}
-          onMouseDown={this.start} 
+          onMouseDown={(event)=>{
+            this.start(event);
+            // this.save();
+          }}
           onMouseMove={this.draw} 
           onMouseUp={this.end} 
           onMouseLeave={this.end}
@@ -68,6 +92,7 @@ class Canvas extends PureComponent {
           style={styles.uiCanvas.base}>
         </canvas>
         <a id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>download</a>
+        <a onClick={this.undo}>undo</a>
       </div>
     )
   }
