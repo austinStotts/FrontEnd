@@ -25,9 +25,9 @@ class App extends PureComponent {
       login: false,
       color: 'red',
       clear: '',
-      red: 100,
-      green: 100,
-      blue: 100,
+      red: Math.floor(Math.random() * 255),
+      green: Math.floor(Math.random() * 255),
+      blue: Math.floor(Math.random() * 255),
       weight: 3
     }
     this.login = this.login.bind(this);
@@ -83,10 +83,10 @@ class App extends PureComponent {
           <div style={{margin:'20px'}}>
             <Button special={styles.uiButton.base} text={'clear'} func={_=>this.setState({clear:Math.random()})}/>
             <div style={{width:'100px', height:'70px', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>
-            <Slider func={this.red}/>
-            <Slider func={this.green}/>
-            <Slider func={this.blue}/>
-            <Slider func={this.weight}/>
+            <Slider min={1} max={255} func={this.red} default={this.state.red}/>
+            <Slider min={1} max={255} func={this.green} default={this.state.green}/>
+            <Slider min={1} max={255} func={this.blue} default={this.state.blue}/>
+            <Slider min={2} max={50} func={this.weight} default={3}/>
           </div>
         </div>
       )

@@ -7,7 +7,7 @@ class Canvas extends PureComponent {
     this.state = {
       draw: false,
       x: '',
-      y: ''
+      y: '',
     }
     this.draw = this.draw.bind(this);
     this.start = this.start.bind(this);
@@ -18,7 +18,7 @@ class Canvas extends PureComponent {
     this.setState({
       draw:true,
       x: event.clientX,
-      y: event.clientY
+      y: event.clientY,
     })
   }
 
@@ -31,9 +31,11 @@ class Canvas extends PureComponent {
       const canvas = this.refs.canvas.getContext('2d');
       canvas.beginPath();
       canvas.strokeStyle = this.props.color;
+      canvas.lineCap = 'round';
+      canvas.lineJoin = 'round';
       canvas.lineWidth = this.props.weight;
-      canvas.moveTo(this.state.x, this.state.y);
-      canvas.lineTo(event.clientX, event.clientY);
+      canvas.moveTo(this.state.x -31, this.state.y - 6);
+      canvas.lineTo(event.clientX - 31, event.clientY - 6);
       canvas.stroke();
       canvas.closePath();
       this.setState({x:event.clientX,y:event.clientY});

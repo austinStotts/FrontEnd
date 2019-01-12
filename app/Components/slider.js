@@ -14,7 +14,15 @@ class Slider extends PureComponent {
   render () {
     return (
       <div>
-        <input min={1} max={255} onChange={this.changeColor} type={'range'} style={{width:'200px'}}></input>
+        <input 
+          min={this.props.min} 
+          max={this.props.max}  
+          defaultValue={this.props.default}
+          onChange={this.changeColor} 
+          type={'range'} 
+          style={{width:'200px', cursor:'pointer'}}
+        >
+        </input>
       </div>
     )
   }
