@@ -34,8 +34,8 @@ class Canvas extends PureComponent {
       canvas.lineCap = 'round';
       canvas.lineJoin = 'round';
       canvas.lineWidth = this.props.weight;
-      canvas.moveTo(this.state.x -31, this.state.y - 6);
-      canvas.lineTo(event.clientX - 31, event.clientY - 6);
+      canvas.moveTo(this.state.x - 30, this.state.y - 30);
+      canvas.lineTo(event.clientX - 30, event.clientY - 30);
       canvas.stroke();
       canvas.closePath();
       this.setState({x:event.clientX,y:event.clientY});

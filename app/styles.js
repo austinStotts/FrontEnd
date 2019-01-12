@@ -26,6 +26,12 @@ const styles = {
       border:'1px solid black',
       borderRadius:'5px',
       outline:'none',
+      display:'inline-block'
+    }
+  },
+  uislider: {
+    base: {
+      fontFamily:'Roboto, sans-serif',
     }
   }
 }
