@@ -1,7 +1,7 @@
 import React , { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class Mouse extends PureComponent {
+class Mouse extends PureComponent { // not working !!
   constructor (props) {
     super(props);
   }
