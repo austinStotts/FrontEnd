@@ -80,6 +80,8 @@ class Canvas extends PureComponent {
     el.setAttribute('download', 'myPrettyPicture:)');
   }
 
+  // 
+
   // called on 'onMouseMove'
   // if draw in state is true, draws line from x,y in state to x,y from client
   // saves the clients x,y to state for the next draw invokation
