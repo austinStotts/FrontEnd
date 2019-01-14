@@ -2,6 +2,8 @@ import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles';
 
+import Link from './link';
+
 class Canvas extends PureComponent {
   constructor (props) {
     super(props);
@@ -29,9 +31,24 @@ class Canvas extends PureComponent {
   // 'toDataURL' method does not seem to be the right format to draw onto canvas...
   // trying to make a(n) ImageObject to draw onto canvas instead...
   save () {
-    // let copy = document.getElementById('canvas');
-    // copy = copy.createImageData()
-    // this.setState({undo: this.state.undo.concat(copy)});
+    let canvas = document.getElementById('canvas');
+    if(this.state.undo.length <= 20) {
+      let undo = [...this.state.undo];
+      createImageBitmap(canvas,0,0,canvas.width,canvas.height)
+      .then(data => {
+        undo.push(data);
+        this.setState({undo});
+      })
+    }
+    else {
+      let undo = [...this.state.undo];
+      undo.shift();
+      createImageBitmap(canvas,0,0,canvas.width,canvas.height)
+      .then(data => {
+        undo.push(data);
+        this.setState({undo});
+      })
+    }
   }
 
   // 'undo' should 'pop' off the last saved image from state and draw it to canvas
@@ -39,11 +56,12 @@ class Canvas extends PureComponent {
   // going to try and use an Image object instead
   // using 'drawImage' with that image object should work...
   undo () {
-    // console.log('undo')
-    // let canvas = document.getElementById('canvas').getContext('2d');
-    // let image = new Image;
-    // image.src = this.state.undo.pop();
-    // canvas.drawImage(image, 0, 0);
+    let undo = [...this.state.undo];
+    let data = undo.pop();
+    this.setState({undo});
+    let canvas = this.refs.canvas.getContext('2d');
+    canvas.clearRect(0,0,2000,2000);
+    canvas.drawImage(data,0,0);
   }
   // save and undo are currently not working...
   // *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
@@ -120,8 +138,8 @@ class Canvas extends PureComponent {
           height={this.props.height} 
           style={styles.uiCanvas.base}>
         </canvas>
-        <a id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>download</a>
-        <a onClick={this.undo}>undo</a> 
+        <a id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>{'download'}</a>
+        <a onClick={this.undo}>{'undo'}</a>
       </div>
     )
   }
@@ -133,6 +151,7 @@ Canvas.propTypes = {
   clear: PropTypes.string,
   weight: PropTypes.string,
   color: PropTypes.string,
+  clearFunc: PropTypes.func
 }
 
 export default Canvas;

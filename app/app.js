@@ -34,6 +34,7 @@ class App extends PureComponent {
     this.green = this.green.bind(this);
     this.blue = this.blue.bind(this);
     this.weight = this.weight.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   red (value) { // set red value from slider
@@ -52,6 +53,10 @@ class App extends PureComponent {
     this.setState({weight:value})
   }
 
+  clear () {
+    this.setState({clear:Math.random()});
+  }
+
 
 
 
@@ -59,7 +64,7 @@ class App extends PureComponent {
     return (
       <div style={{margin:'0px'}}>
         <div style={{margin:'30px'}}>
-          <Canvas clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={window.innerWidth - 65} height={window.innerHeight - 350}/>
+          <Canvas clearFunc={this.clear} clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={window.innerWidth - 65} height={window.innerHeight - 350}/>
         </div>
         <div style={{margin:'20px'}}>
           <div style={{border:'1px solid black',borderRadius:'5px',width:'100px', height:'70px', display:'inline-block', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>
