@@ -11,8 +11,9 @@ class Button extends PureComponent {
 
   render () {
     return (
-      <div style={this.props.specialDiv}>
+      <div className="buttonDiv" style={this.props.specialDiv}>
         <button
+          className="button"
           onClick={this.props.func}
           style={this.props.special}
         >

@@ -16,17 +16,27 @@ class Canvas extends PureComponent {
       y: '',
       url: '',
       undo: [],
+      image: ''
     }
+
+    this.socket = io('http://localhost:3000');
+    this.socket.on('new', (data) => {
+      this.update(data);
+    })
+    this.socket.on('update', (data) => {
+      console.log('data ->',data)
+      this.update(data);
+    })
+    this.socket.on('hello', data => console.log(data))
+    
     this.draw = this.draw.bind(this);
     this.start = this.start.bind(this);
     this.end = this.end.bind(this);
     this.download = this.download.bind(this);
     this.save = this.save.bind(this);
     this.undo = this.undo.bind(this);
+    this.update = this.update.bind(this);
   }
-
-
-
 
   // the idea is that 'save' will push image data to an array for later rerendering...
   // once saved the data could be used for undo feature as well as sharing content live
@@ -65,25 +75,25 @@ class Canvas extends PureComponent {
     let canvas = this.refs.canvas.getContext('2d');
     canvas.clearRect(0,0,2000,2000);
     canvas.drawImage(data,0,0);
-  }
-  // save and undo are currently not working...
-  // *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
-
-  componentDidMount () {
-    let socket = io('http://localhost:3000');
-    socket.on('hello', (data) => {
-      console.log(data)
-    })
+    this.send();
   }
 
+  // create base64 string to send 
+  // then decode that string on the way back
   send () {
     const canvas = document.getElementById('canvas');
-    createImageBitmap(canvas,0,0,canvas.width,canvas.height)
-    .then(data => {
-      Axios.post('/', data).catch(err => console.log(err))
-    })
+    this.socket.emit('update', canvas.toDataURL());
   }
 
+  update (data) {
+    let canvas = this.refs.canvas.getContext('2d');
+    let img = new Image();
+    img.onload = function () {
+      canvas.clearRect(0,0,2000,2000);
+      canvas.drawImage(this, 0, 0);
+    }
+    img.src = data;
+  }
 
   // 'start' triggers the start of drawing to canvas
   // changes draw in state to true.
@@ -146,17 +156,19 @@ class Canvas extends PureComponent {
           onMouseDown={(event)=>{
             this.start(event);
             this.save();
-            this.send();
           }}
           onMouseMove={this.draw} 
-          onMouseUp={this.end} 
+          onMouseUp={()=> {
+            this.end();
+            this.send();
+          }} 
           onMouseLeave={this.end}
           width={this.props.width} 
           height={this.props.height} 
           style={styles.uiCanvas.base}>
         </canvas>
-        <a id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>{'download'}</a>
-        <a onClick={this.undo}>{'undo'}</a>
+        <a className="function" id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>{'download'}</a>
+        <a className="function" onClick={this.undo}>{'undo'}</a>
       </div>
     )
   }
