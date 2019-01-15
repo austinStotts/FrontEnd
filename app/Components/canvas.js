@@ -1,6 +1,9 @@
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 import styles from '../styles';
+import Axios from 'axios';
+
 
 import Link from './link';
 
@@ -66,7 +69,20 @@ class Canvas extends PureComponent {
   // save and undo are currently not working...
   // *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
 
+  componentDidMount () {
+    let socket = io('http://localhost:3000');
+    socket.on('hello', (data) => {
+      console.log(data)
+    })
+  }
 
+  send () {
+    const canvas = document.getElementById('canvas');
+    createImageBitmap(canvas,0,0,canvas.width,canvas.height)
+    .then(data => {
+      Axios.post('/', data).catch(err => console.log(err))
+    })
+  }
 
 
   // 'start' triggers the start of drawing to canvas
@@ -130,6 +146,7 @@ class Canvas extends PureComponent {
           onMouseDown={(event)=>{
             this.start(event);
             this.save();
+            this.send();
           }}
           onMouseMove={this.draw} 
           onMouseUp={this.end} 
