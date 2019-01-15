@@ -34,6 +34,11 @@ canvas {
   border-color: red;
 }
 
-.buttonDiv {
+.slider {
+  width: 200px;
+  cursor: pointer;
+}
 
+.label {
+  font-family: 'Roboto', sans-serif;
 }

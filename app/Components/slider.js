@@ -11,6 +11,7 @@ const Slider = forwardRef((props, ref) => {
     <div style={props.specialDiv}>
       <input 
         ref={ref}
+        className="slider"
         type={'range'} 
         min={props.min} 
         max={props.max}  
@@ -21,6 +22,7 @@ const Slider = forwardRef((props, ref) => {
       >
       </input>
       <label 
+        className="label"
         htmlFor={props.name} 
         style={props.specialLbl}
       >

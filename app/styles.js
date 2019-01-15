@@ -15,20 +15,12 @@ const styles = {
   },
   uiCanvas: {
     base: {
-      border:'2px solid black'
+      border:'2px solid black',
+      borderRadius:'3px'
     }
   },
   uiButton: {
-    base: {
-      width:'50px',
-      height:'30px',
-      margin:'3px',
-      border:'1px solid black',
-      borderRadius:'5px',
-      outline:'none',
-      display:'inline-block',
-      cursor:'pointer'
-    }
+
   },
   uislider: {
     base: {

@@ -66,7 +66,7 @@ class App extends PureComponent {
           <Canvas clearFunc={this.clear} clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={window.innerWidth - 65} height={window.innerHeight - 350}/>
         </div>
         <div style={{margin:'20px'}}>
-          <div style={{border:'1px solid black',borderRadius:'5px',width:'100px', height:'70px', display:'inline-block', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>
+          <div style={{border:'1px solid black',borderRadius:'5px',width:'150px', height:'110px', margin:'0px 5px 0px 0px', display:'inline-block', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>
           <div style={{display:'inline-block'}}>
             <div style={{display:'inline-block', margin:'3px'}}>
               <Button text={'clear'} func={_=>this.setState({clear:Math.random()})}/>
