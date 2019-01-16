@@ -22,6 +22,7 @@ canvas {
 
 .roomInput {
   display: inline-block;
+  font-size: 15px;
   margin-left: 60px;
   outline: none;
   width: 140px;

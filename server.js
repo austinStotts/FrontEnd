@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
+const redis = require('./redis');
 
 
 app.use(express.static('dist'));
 
-let current = {}
+// let current = {}
 
 io.on('connection', socket => {
   console.log('connected!');
@@ -15,12 +16,12 @@ io.on('connection', socket => {
   socket.on('get', (room) => {
     socket.join(room);
     console.log(room);
-    socket.emit('give', current[room])
+    redis.get(room, (image) => socket.emit('give', image));
   })
 
   socket.on('update', (info) => {
     console.log('broadcasting');
-    current[info.room] = info.image;
+    redis.set(info.room, info.image);
     socket.join(info.room)
     socket.in(info.room).emit('update', info);
   })
