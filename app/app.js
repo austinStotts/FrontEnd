@@ -21,14 +21,14 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      login: false,
-      color: 'red',
       clear: '', // when changed, canvas rerenders
       red: Math.floor(Math.random() * 255), // red value for canvas
       green: Math.floor(Math.random() * 255), // green value for canvas
       blue: Math.floor(Math.random() * 255), // blue value for canvas
       weight:'3' // draw width for canvas
     }
+
+    // bind functions
     this.red = this.red.bind(this);
     this.green = this.green.bind(this);
     this.blue = this.blue.bind(this);
@@ -63,21 +63,28 @@ class App extends PureComponent {
     return (
       <div style={{margin:'0px'}}>
         <div style={{margin:'30px'}}>
-          <Canvas clearFunc={this.clear} clear={this.state.clear} weight={this.state.weight} color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} width={window.innerWidth - 65} height={window.innerHeight - 350}/>
+          <Canvas 
+            clearFunc={this.clear} 
+            clear={this.state.clear} 
+            weight={this.state.weight} 
+            color={`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`} 
+            width={window.innerWidth - 65} 
+            height={window.innerHeight - 350}
+          />
         </div>
-        <div style={{margin:'20px'}}>
+        <div className="options">
           <div style={{border:'1px solid black',borderRadius:'5px',width:'150px', height:'110px', margin:'0px 5px 0px 0px', display:'inline-block', backgroundColor:`rgb(${this.state.red}, ${this.state.green}, ${this.state.blue})`}}></div>
-          <div style={{display:'inline-block'}}>
+          <div className="colors">
             <div style={{display:'inline-block', margin:'3px'}}>
-              <Button text={'clear'} func={_=>this.setState({clear:Math.random()})}/>
-              <Button text={'red'} func={_=>this.setState({red:255,green:65,blue:54})}/>
-              <Button text={'blue'} func={_=>this.setState({red:0,green:116,blue:217})}/>
-              <Button text={'green'} func={_=>this.setState({red:1,green:255,blue:112})}/>
+              <Button text={'clear'} class={'clear'} func={_=>this.setState({clear:Math.random()})}/>
+              <Button text={'red'} class={'red'} func={_=>this.setState({red:255,green:65,blue:54})}/>
+              <Button text={'blue'} class={'blue'} func={_=>this.setState({red:0,green:116,blue:217})}/>
+              <Button text={'green'} class={'green'} func={_=>this.setState({red:1,green:255,blue:112})}/>
             </div>
             <div style={{display:'inline-block'}}>
-              <Button text={'orange'} func={_=>this.setState({red:255,green:133,blue:27})}/>
-              <Button text={'purple'} func={_=>this.setState({red:177,green:13,blue:201})}/>
-              <Button text={'teal'} func={_=>this.setState({red:57,green:204,blue:204})}/>
+              <Button text={'orange'} class={'orange'} func={_=>this.setState({red:255,green:133,blue:27})}/>
+              <Button text={'purple'} class={'purple'} func={_=>this.setState({red:177,green:13,blue:201})}/>
+              <Button text={'teal'} class={'teal'} func={_=>this.setState({red:57,green:204,blue:204})}/>
             </div>
           </div>
           <Slider name={'red'} label={' R'} min={1} max={255} func={this.red} default={this.state.red}/>

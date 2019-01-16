@@ -9,10 +9,53 @@ canvas {
   text-decoration: none;
   color: black;
   transition-duration: 0.5s;
+  margin-left: 10px;
 }
 
 .function:hover {
   color: red;
+}
+
+.below {
+  margin-top: 10px;
+}
+
+.roomInput {
+  display: inline-block;
+  margin-left: 60px;
+  outline: none;
+  width: 140px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.join {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 60px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.join:hover {
+  color: palevioletred;
+  border-color: palevioletred;
+}
+
+.rooms {
+  display: inline-block;
+}
+
+.download {
+  display: inline-block;
 }
 
 .button {
@@ -29,10 +72,16 @@ canvas {
   outline: none;
 }
 
-.button:hover {
-  color: red;
-  border-color: red;
+.options {
+  display: inline-block;
+  margin-left: 20px;
 }
+
+.colors {
+  display: inline-block;
+  margin-left: 10px;
+}
+
 
 .slider {
   width: 200px;
@@ -41,4 +90,143 @@ canvas {
 
 .label {
   font-family: 'Roboto', sans-serif;
+}
+
+.clear {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.8s;
+  outline: none;
+}
+
+.clear:hover {
+  color: white;
+}
+
+.red {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.blue {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.green {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.orange {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.purple {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.teal {
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+  transition-duration: 0.5s;
+  outline: none;
+}
+
+.red:hover {
+  color: #FF4136;
+  border-color: #FF4136;
+}
+
+.blue:hover {
+  color: #0074D9;
+  border-color: #0074D9;
+}
+
+.green:hover {
+  color: #01FF70;
+  border-color: #01FF70;
+}
+
+.orange:hover {
+  color: #FF851B;
+  border-color: #FF851B;
+}
+
+.purple:hover {
+  color: #B10DC9;
+  border-color: #B10DC9;
+}
+
+.teal:hover {
+  color: #39CCCC;
+  border-color: #39CCCC;
 }

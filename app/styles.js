@@ -16,7 +16,7 @@ const styles = {
   uiCanvas: {
     base: {
       border:'2px solid black',
-      borderRadius:'3px'
+      borderRadius:'8px'
     }
   },
   uiButton: {

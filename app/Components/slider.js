@@ -37,7 +37,6 @@ Slider.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   name: PropTypes.string,
-  default: PropTypes.string,
   special: PropTypes.object,
   specialLbl: PropTypes.object,
   specialDiv: PropTypes.object,

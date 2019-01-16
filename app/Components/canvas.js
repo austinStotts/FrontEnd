@@ -2,10 +2,9 @@ import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import styles from '../styles';
-import Axios from 'axios';
 
-
-import Link from './link';
+import Input from './input';
+import Button from './button';
 
 class Canvas extends PureComponent {
   constructor (props) {
@@ -14,21 +13,20 @@ class Canvas extends PureComponent {
       draw: false,
       x: '',
       y: '',
-      url: '',
       undo: [],
-      image: ''
+      image: '',
+      room: '',
+      current: 'home'
     }
-
-    this.socket = io('http://localhost:3000');
-    this.socket.on('new', (data) => {
-      this.update(data);
-    })
-    this.socket.on('update', (data) => {
-      console.log('data ->',data)
-      this.update(data);
-    })
-    this.socket.on('hello', data => console.log(data))
     
+    // socket.io setup and connection;
+    this.socket = io('http://localhost:3000');
+    this.socket.on('new', data => this.update(data) )
+    this.socket.on('update', data => this.check(data))
+    this.socket.on('hello', data => console.log(data))
+    this.socket.on('give', image => this.newRoom(image))
+    
+    // bind functions
     this.draw = this.draw.bind(this);
     this.start = this.start.bind(this);
     this.end = this.end.bind(this);
@@ -36,6 +34,43 @@ class Canvas extends PureComponent {
     this.save = this.save.bind(this);
     this.undo = this.undo.bind(this);
     this.update = this.update.bind(this);
+    this.room = this.room.bind(this);
+    this.join = this.join.bind(this);
+    this.newRoom = this.newRoom.bind(this);
+    this.check = this.check.bind(this);
+  }
+
+  check (info) {
+    if(info.room === this.state.current) {
+      this.update(info.image);
+    }
+  }
+
+  // change the room when input changes
+  room (e) { 
+    this.setState({room:e.target.value})
+  }
+
+  join () {
+    if(this.state.room) {
+      this.setState({current:this.state.room}, () => {
+        this.socket.emit('get', this.state.current);
+      });
+      
+    }
+  }
+
+  newRoom (data) {
+    let canvas = this.refs.canvas.getContext('2d');
+    if(!data) {
+      canvas.clearRect(0,0,2000,2000);
+    }
+    let img = new Image();
+    img.onload = function () {
+      canvas.clearRect(0,0,2000,2000);
+      canvas.drawImage(this, 0, 0);
+    }
+    img.src = data;
   }
 
   // the idea is that 'save' will push image data to an array for later rerendering...
@@ -65,31 +100,37 @@ class Canvas extends PureComponent {
   }
 
   // 'undo' should 'pop' off the last saved image from state and draw it to canvas
-  // trying to create an image with src set to image url but this isnt working
-  // going to try and use an Image object instead
-  // using 'drawImage' with that image object should work...
+  // uses draw image with an image bitmap to clear then draw the last canvas
   undo () {
     let undo = [...this.state.undo];
-    let data = undo.pop();
-    this.setState({undo});
-    let canvas = this.refs.canvas.getContext('2d');
-    canvas.clearRect(0,0,2000,2000);
-    canvas.drawImage(data,0,0);
-    this.send();
+    if(undo.length > 0) {
+      let data = undo.pop();
+      this.setState({undo});
+      let canvas = this.refs.canvas.getContext('2d');
+      canvas.clearRect(0,0,2000,2000);
+      canvas.drawImage(data,0,0);
+      this.send();
+    }
   }
 
-  // create base64 string to send 
+  // create base64 string to send
   // then decode that string on the way back
   send () {
     const canvas = document.getElementById('canvas');
-    this.socket.emit('update', canvas.toDataURL());
+    this.socket.emit('update', {
+      image: canvas.toDataURL(),
+      room: this.state.current
+    });
   }
 
+
+  // called when a new canvas url needs to be drawn
+  // creates img element then draws img on canvas
   update (data) {
     let canvas = this.refs.canvas.getContext('2d');
     let img = new Image();
     img.onload = function () {
-      canvas.clearRect(0,0,2000,2000);
+      //canvas.clearRect(0,0,2000,2000);
       canvas.drawImage(this, 0, 0);
     }
     img.src = data;
@@ -167,8 +208,29 @@ class Canvas extends PureComponent {
           height={this.props.height} 
           style={styles.uiCanvas.base}>
         </canvas>
-        <a className="function" id="download" onClick={this.download} href={this.state.url} style={{display:'block'}}>{'download'}</a>
-        <a className="function" onClick={this.undo}>{'undo'}</a>
+        <div className="below">
+          <div className="download">
+            <a 
+              className="function" 
+              id="download" 
+              onClick={this.download} 
+              href={this.state.url} 
+              style={{display:'block'}}
+            >
+              {'download'}
+            </a>
+            <a 
+              className="function" 
+              onClick={this.undo}
+            >
+              {'undo'}
+            </a>
+          </div>
+          <div className="rooms">
+            <Input class={'roomInput'} func={(e)=>this.room(e)} placeholder={' roomname...'}/>
+            <Button class={'join'} text={'join'} func={this.join}/>
+          </div>
+        </div>
       </div>
     )
   }
@@ -177,7 +239,6 @@ class Canvas extends PureComponent {
 Canvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  clear: PropTypes.string,
   weight: PropTypes.string,
   color: PropTypes.string,
   clearFunc: PropTypes.func

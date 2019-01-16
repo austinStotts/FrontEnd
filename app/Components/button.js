@@ -13,7 +13,7 @@ class Button extends PureComponent {
     return (
       <div className="buttonDiv" style={this.props.specialDiv}>
         <button
-          className="button"
+          className={this.props.class}
           onClick={this.props.func}
           style={this.props.special}
         >
@@ -28,7 +28,8 @@ Button.propTyps = {
   text: PropTypes.string.isRequired,
   func: PropTypes.func,
   special: PropTypes.object,
-  specialDiv: PropTypes.object
+  specialDiv: PropTypes.object,
+  calss: PropTypes.string
 }
 
 export default Button;

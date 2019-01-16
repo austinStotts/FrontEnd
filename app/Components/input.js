@@ -1,8 +1,5 @@
 import React , { Component, PureComponent, forwardRef } from 'react';
-import Radium from 'radium';
 import PropTypes from 'prop-types';
-
-import styles from '../styles';
 
 // ForwardRef allows access to that ref further down the tree.
 // -> used here to allow clearing the input from outside the component.
@@ -13,7 +10,7 @@ const Input = forwardRef((props, ref) => {
     >
       <input
         ref={ref}
-        style={props.special}
+        className={props.class}
         placeholder={props.placeholder}
         onChange={props.func}
         type={props.type}
