@@ -20,7 +20,7 @@ class Canvas extends PureComponent {
     }
     
     // socket.io setup and connection;
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://ec2-18-222-115-113.us-east-2.compute.amazonaws.com:3000');
     this.socket.on('new', data => this.update(data) )
     this.socket.on('update', data => this.check(data))
     this.socket.on('hello', data => console.log(data))

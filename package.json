@@ -6,7 +6,8 @@
   "scripts": {
     "webpack": "webpack -w",
     "server": "nodemon server.js",
-    "client": "nodemon client.js"
+    "client": "nodemon client.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
