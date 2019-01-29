@@ -1,19 +1,6 @@
-# React Front End Library Development
-## react.js front end library
+# PaintDraw
+## collaborative drawing application
 
-## this repo has more or less pivoted to a React / canvas drawing app
-### using the canvas you can draw pictures and save them!
-
-
-### special prop
-#### if given an object with css as a 'special' prop, this object will overide default css.
-#### this is the same for 'specialDiv' props. All components are returned wrapped in a div.
-
-
-### Link
-#### text component with props for anchoring and invoking functions on click.
-#### takes 'special' & 'specialDiv' props
-
-### Button 
-#### components used to invoke functions
-#### takes 'special' & 'specialDiv' props
+### using react.js and the html canvas to render user drawings
+#### websockets (socket.io) handle constant client / server connection to update canvases dynamically.
+#### users can join rooms and draw together. all canvas data is stored using redis.
