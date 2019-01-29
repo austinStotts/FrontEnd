@@ -227,7 +227,7 @@ class Canvas extends PureComponent {
             </a>
           </div>
           <div className="rooms">
-            <Input class={'roomInput'} func={(e)=>this.room(e)} placeholder={' roomname...'}/>
+            <Input class={'roomInput'} join={this.join} func={(e)=>this.room(e)} placeholder={' roomname...'}/>
             <Button class={'join'} text={'join'} func={this.join}/>
           </div>
         </div>

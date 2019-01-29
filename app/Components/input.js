@@ -14,6 +14,7 @@ const Input = forwardRef((props, ref) => {
         placeholder={props.placeholder}
         onChange={props.func}
         type={props.type}
+        onKeyDown={e => {if(e.key === "Enter") props.join()}}
       >
       </input>
     </div>

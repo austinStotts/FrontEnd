@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "paintdraw",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/austinStotts/FrontEnd.git"
+    "url": "git+https://github.com/austinStotts/PaintDraw.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/austinStotts/FrontEnd/issues"
+    "url": "https://github.com/austinStotts/PaintDraw/issues"
   },
-  "homepage": "https://github.com/austinStotts/FrontEnd#readme",
+  "homepage": "https://github.com/austinStotts/PaintDraw#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
