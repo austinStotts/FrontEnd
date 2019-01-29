@@ -3,14 +3,7 @@ import React, { Component, PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 // components from files
-import Link from './Components/link';
 import Button from './Components/button';
-import Mouse from './Components/mouse';
-import Input from './Components/input';
-import Bar from './Components/bar';
-import Repeat from './Components/repeat';
-import Login from './Components/login';
-import Rooms from './Components/rooms';
 import Canvas from './Components/canvas';
 import Slider from './Components/slider';
 
