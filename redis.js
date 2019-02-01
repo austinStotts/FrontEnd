@@ -1,5 +1,5 @@
 const Redis = require('ioredis');
-const redis = new Redis({ host: 'redis' });
+const redis = new Redis({ host: 'PaintRedis' });
 
 const set = (key, value) => {
   redis.set(key, value)

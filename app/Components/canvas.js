@@ -38,6 +38,7 @@ class Canvas extends PureComponent {
     this.join = this.join.bind(this);
     this.newRoom = this.newRoom.bind(this);
     this.check = this.check.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   check (info) {
@@ -165,8 +166,6 @@ class Canvas extends PureComponent {
     el.setAttribute('download', 'myPrettyPicture:)');
   }
 
-  // 
-
   // called on 'onMouseMove'
   // if draw in state is true, draws line from x,y in state to x,y from client
   // saves the clients x,y to state for the next draw invokation
@@ -186,28 +185,41 @@ class Canvas extends PureComponent {
     }
   }
 
+  handleKeyDown (e) {
+    if(e === 90) {
+      this.undo()
+    }
+  }
+
+  componentDidMount () {
+    this.refs.canvas.tabIndex = 1000
+  }
+
 
   render () {
     return (
       <div style={{width:'100%',height:'100%'}}>
-        <canvas 
-          id="canvas"
-          ref="canvas" 
-          key={this.props.clear}
-          onMouseDown={(event)=>{
-            this.start(event);
-            this.save();
-          }}
-          onMouseMove={this.draw} 
-          onMouseUp={()=> {
-            this.end();
-            this.send();
-          }} 
-          onMouseLeave={this.end}
-          width={this.props.width} 
-          height={this.props.height} 
-          style={styles.uiCanvas.base}>
-        </canvas>
+        <div>
+          <canvas
+            id="canvas"
+            ref="canvas" 
+            key={this.props.clear}
+            onMouseDown={(event)=>{
+              this.start(event);
+              this.save();
+            }}
+            onMouseMove={this.draw} 
+            onMouseUp={()=> {
+              this.end();
+              this.send();
+            }} 
+            onMouseLeave={this.end}
+            onKeyDown={e => this.handleKeyDown(e.keyCode)}
+            width={this.props.width} 
+            height={this.props.height} 
+            style={styles.uiCanvas.base}>
+          </canvas>
+        </div>
         <div className="below">
           <div className="download">
             <a 

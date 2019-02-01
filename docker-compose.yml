@@ -1,15 +1,15 @@
 version: '2'
 services:
   app:
-    container_name: PaintDraw
+    container_name: PaintDraw2
     restart: always
     build: .
     ports:
       - '3000:3000'
     links:
-      - redis
-  redis:
-    container_name: redis
+      - PaintRedis
+  PaintRedis:
+    container_name: PaintRedis
     image: redis
     ports:
       - '6379:6379'
